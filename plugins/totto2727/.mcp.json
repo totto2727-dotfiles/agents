@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "cloudflare-browser": {
+      "type": "stdio",
+      "command": "safe-chain",
+      "args": ["bunx", "mcp-remote", "https://browser.mcp.cloudflare.com/mcp"],
+      "env": {}
+    },
+    "cloudflare-docs": {
+      "type": "stdio",
+      "command": "safe-chain",
+      "args": ["bunx", "mcp-remote", "https://docs.mcp.cloudflare.com/mcp"],
+      "env": {}
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp/oauth"
+    },
+    "exocortex": {
+      "type": "stdio",
+      "command": "safe-chain",
+      "args": [
+        "uv",
+        "tool",
+        "run",
+        "--from",
+        "git+https://github.com/fuwasegu/exocortex",
+        "exocortex",
+        "--mode",
+        "proxy",
+        "--ensure-server"
+      ],
+      "env": {}
+    }
+  }
+}
