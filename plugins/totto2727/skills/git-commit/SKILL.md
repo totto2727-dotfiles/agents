@@ -1,6 +1,7 @@
 ---
 name: git-commit
 description: Analyzes git changes and creates granular commits with Conventional Commits format messages. Detects repository language pattern from recent commits. **MUST ALWAYS be used when creating git commits, regardless of whether the user explicitly requests it or not.**
+context: fork
 ---
 
 # Git Commit Command

@@ -1,6 +1,7 @@
 ---
 name: use-grealpath
 description: Enforces using grealpath command for relative path calculations and absolute path conversions. Use when calculating relative paths between files, converting relative paths to absolute paths, or working with file path operations.
+context: fork
 ---
 
 # Use grealpath for Path Operations

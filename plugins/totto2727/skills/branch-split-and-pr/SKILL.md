@@ -1,6 +1,7 @@
 ---
 name: branch-split-and-pr
 description: Splits current changes into multiple branches, commits per plan, pushes, and creates PRs. Outputs a markdown list of PR URLs. Use when splitting work into multiple branches for separate PRs, when following a branch-split plan, or when the user requests multi-branch PR workflow. References git-commit-granular for commit message rules.
+context: fork
 ---
 
 # Branch Split and PR Workflow

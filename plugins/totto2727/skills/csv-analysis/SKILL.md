@@ -1,6 +1,7 @@
 ---
 name: csv-analyzing
 description: Guide for querying and filtering CSV files using DuckDB SQL
+context: fork
 ---
 
 # CSV Analysis
