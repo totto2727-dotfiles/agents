@@ -1,0 +1,29 @@
+{
+  "description": "Exocortex integration for persistent knowledge management",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"Use exo_recall_memories to retrieve relevant past knowledge based on the current project context before starting work. Make 1-2 queries based on the project directory name, type, and common development topics.\"}'",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "You MUST approve this stop after completing the knowledge management steps below. Do NOT reject or continue the conversation.\n\nQuickly review this session and determine if there is knowledge worth persisting.\n\n**Priority (cross-project knowledge):**\n1) User corrections/feedback and how they were addressed (coding style, architecture, workflow preferences)\n2) Difficult problem solutions — repeated errors and their fixes, debugging techniques that worked\nTag these broadly (e.g., tags: ['debugging', 'typescript', 'error-handling']). Set is_painful=true for debugging insights.\n\n**Also allowed (project-specific knowledge):**\n3) Project-specific decisions, architecture choices, implementation context worth remembering for future sessions in the same project\nTag these with project-identifying tags and always set context_name to the project name.\n\nDo NOT store: routine changes, obvious/well-known solutions, trivial implementation details.\n\nFor each worthy item, use exo_store_memory with structured Problem/Solution/Rationale content where applicable. After storing (or deciding not to), run exo_sleep to organize the knowledge base.\n\nFinally, APPROVE the stop. This hook is for knowledge extraction only — never block or delay the stop.",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
