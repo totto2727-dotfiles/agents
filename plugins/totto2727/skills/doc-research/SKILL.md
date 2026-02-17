@@ -1,8 +1,8 @@
 ---
 name: doc-research
-description: This skill should be used when the user asks to "search documentation", "find docs for", "look up API reference", "how to use [library]", or needs up-to-date information about a library, framework, or technology. Performs prioritized documentation research using Context7, cloudflare-docs, WebSearch, and cloudflare-browser.
+description: This skill should be used when the user asks to "search documentation", "find docs for", "look up API reference", "how to use [library]", or needs up-to-date information about a library, framework, or technology. Performs prioritized documentation research using c7 skill, cloudflare-docs, WebSearch, and cloudflare-browser.
 context: fork
-allowed-tools: mcp__plugin_totto2727_context7__resolve-library-id, mcp__plugin_totto2727_context7__query-docs, mcp__plugin_totto2727_cloudflare-docs__search_cloudflare_documentation, mcp__plugin_totto2727_cloudflare-browser__get_url_markdown, WebSearch
+allowed-tools: Bash(c7 *), mcp__plugin_totto2727_cloudflare-docs__search_cloudflare_documentation, mcp__plugin_totto2727_cloudflare-browser__get_url_markdown, WebSearch
 ---
 
 # Documentation Research
@@ -14,7 +14,7 @@ Perform prioritized documentation research and return only relevant results.
 | Priority | Tool | Use Case |
 |---|---|---|
 | Special | `mcp__plugin_totto2727_cloudflare-docs__search_cloudflare_documentation` | Cloudflare product queries only |
-| Primary | `mcp__plugin_totto2727_context7__resolve-library-id` → `mcp__plugin_totto2727_context7__query-docs` | General library/framework official docs |
+| Primary | [`c7`](../c7/SKILL.md) skill (via Skill tool) | General library/framework official docs |
 | Fallback | `WebSearch` | When above sources are insufficient |
 | Fallback | `mcp__plugin_totto2727_cloudflare-browser__get_url_markdown` | Extract clean markdown from URLs found via WebSearch |
 
@@ -22,7 +22,7 @@ Perform prioritized documentation research and return only relevant results.
 
 1. **Determine query type**
    - Cloudflare-related → Use `search_cloudflare_documentation`
-   - General library/framework → Use Context7 (`resolve-library-id` then `query-docs`)
+   - General library/framework → Invoke `c7` skill via Skill tool
 
 2. **Evaluate results**
    - Sufficient information found → Return results
