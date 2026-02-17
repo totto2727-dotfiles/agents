@@ -12,10 +12,6 @@
       "args": ["bunx", "mcp-remote", "https://docs.mcp.cloudflare.com/mcp"],
       "env": {}
     },
-    "context7": {
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp/oauth"
-    },
     "exocortex": {
       "type": "stdio",
       "command": "safe-chain",
