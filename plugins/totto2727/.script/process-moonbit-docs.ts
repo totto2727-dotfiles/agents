@@ -31,9 +31,8 @@ function parseSections(text: string): { path: string; content: string }[] {
   const sections: { path: string; content: string }[] = [];
   for (let i = 0; i < matches.length; i++) {
     const start = matches[i].index;
-    const end = i + 1 < matches.length
-      ? text.lastIndexOf("<!-- path:", matches[i + 1].index)
-      : text.length;
+    const end =
+      i + 1 < matches.length ? text.lastIndexOf("<!-- path:", matches[i + 1].index) : text.length;
     sections.push({
       path: matches[i].path,
       content: text.slice(start, end).trim(),
@@ -102,8 +101,7 @@ for (const section of sections) {
   }
 
   const baseFilename =
-    section.path.replace(/\.md$/, "").replaceAll("/", "-").replaceAll("_", "-") +
-    ".md";
+    section.path.replace(/\.md$/, "").replaceAll("/", "-").replaceAll("_", "-") + ".md";
 
   const isFundamentals = section.path === "language/fundamentals.md";
   const subFiles = isFundamentals
@@ -112,16 +110,15 @@ for (const section of sections) {
 
   for (const sub of subFiles) {
     otherFiles.push({ filename: sub.filename, title: sub.filename });
-    await Deno.writeTextFile(join(outputDir, sub.filename), licenseHeader + "\n\n" + sub.content + "\n");
+    await Deno.writeTextFile(
+      join(outputDir, sub.filename),
+      licenseHeader + "\n\n" + sub.content + "\n",
+    );
   }
 }
 
-const introSection = sections.find(
-  (s) => s.path === "language/introduction.md",
-);
-const links = otherFiles
-  .map((f) => `- [${f.title}](./${f.filename})`)
-  .join("\n");
+const introSection = sections.find((s) => s.path === "language/introduction.md");
+const links = otherFiles.map((f) => `- [${f.title}](./${f.filename})`).join("\n");
 
 const skillContent = `---
 name: moonbit-docs

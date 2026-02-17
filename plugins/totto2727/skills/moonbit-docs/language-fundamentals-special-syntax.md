@@ -19,7 +19,7 @@ MoonBit provides a convenient pipe syntax `x |> f(y)`, which can be used to chai
 |> ignore // <=> ignore(add(1, 5))
 ```
 
-The MoonBit code follows the *data-first* style, meaning the function places its "subject" as the first argument.
+The MoonBit code follows the _data-first_ style, meaning the function places its "subject" as the first argument.
 Thus, the pipe operator inserts the left-hand side value into the first argument of the right-hand side function call by default.
 For example, `x |> f(y)` is equivalent to `f(x, y)`.
 

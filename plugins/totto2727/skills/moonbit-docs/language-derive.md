@@ -152,6 +152,7 @@ test "derive default enum" {
 Enums that has no cases or more than one cases without parameters cannot derive `Default`.
 
 <!-- MANUAL CHECK  should not compile -->
+
 ```moonbit
 enum CannotDerive1 {
     Case1(String)
@@ -222,9 +223,11 @@ test "json basic" {
 Both derive directives accept a number of arguments to configure the exact behavior of serialization and deserialization.
 
 ##### WARNING
+
 The actual behavior of JSON serialization arguments is unstable.
 
 ##### WARNING
+
 JSON derivation arguments are only for coarse-grained control of the derived format.
 If you need to precisely control how the types are laid out,
 consider **directly implementing the two traits instead**.
@@ -344,12 +347,15 @@ test {
 
   Renaming assumes the name of fields in `snake_case`
   and the name of structs/enum cases in `PascalCase`.
+
 - `cases(...)` (enum only) controls the layout of enum cases.
 
   #### WARNING
+
   This might be replaced with case attributes in the future.
 
   For example, for an enum
+
   ```moonbit
   enum E {
     A(...)
@@ -360,12 +366,15 @@ test {
   you are able to control each case using `cases(A(...), B(...))`.
 
   See [Case arguments]() below for details.
+
 - `fields(...)` (struct only) controls the layout of struct fields.
 
   #### WARNING
+
   This might be replaced with field attributes in the future.
 
   For example, for a struct
+
   ```moonbit
   struct S {
     x: Int
