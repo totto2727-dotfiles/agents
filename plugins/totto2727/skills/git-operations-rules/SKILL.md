@@ -9,6 +9,10 @@ description: Critical rules for git operations. Enforces git unstage, git undo, 
 
 These rules MUST ALWAYS be followed when performing git operations.
 
+### git -C
+
+Do not use `git -C <path>`. Always `cd` to the repository directory first, or use absolute paths within the current working directory.
+
 ### git unstage
 
 Use `git unstage` to reset the staging area. Do not pass any options.
