@@ -18,4 +18,3 @@ description: Session persistence for terminal processes using zmx. Use when crea
 - Plain text: `zmx history <name>`
 - With VT escapes: `zmx history <name> --vt`
 - HTML format: `zmx history <name> --html`
-

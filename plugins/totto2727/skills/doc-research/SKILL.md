@@ -11,11 +11,11 @@ Perform prioritized documentation research and return only relevant results.
 
 ## Available Tools
 
-| Priority | Tool                                                                     | Use Case                                             |
-| -------- | ------------------------------------------------------------------------ | ---------------------------------------------------- |
-| Primary  | [`c7`](../c7/SKILL.md) skill (via Skill tool)                            | General library/framework official docs              |
-| Fallback | `WebSearch`                                                              | When above sources are insufficient                  |
-| Fallback | `mcp__plugin_totto2727_cloudflare-browser__get_url_markdown`             | Extract clean markdown from URLs found via WebSearch |
+| Priority | Tool                                                         | Use Case                                             |
+| -------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| Primary  | [`c7`](../c7/SKILL.md) skill (via Skill tool)                | General library/framework official docs              |
+| Fallback | `WebSearch`                                                  | When above sources are insufficient                  |
+| Fallback | `mcp__plugin_totto2727_cloudflare-browser__get_url_markdown` | Extract clean markdown from URLs found via WebSearch |
 
 ## Workflow
 
