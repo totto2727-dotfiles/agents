@@ -1,11 +1,5 @@
 {
   "mcpServers": {
-    "cloudflare-browser": {
-      "type": "stdio",
-      "command": "safe-chain",
-      "args": ["bunx", "mcp-remote", "https://browser.mcp.cloudflare.com/mcp"],
-      "env": {}
-    },
     "exocortex": {
       "type": "stdio",
       "command": "safe-chain",
