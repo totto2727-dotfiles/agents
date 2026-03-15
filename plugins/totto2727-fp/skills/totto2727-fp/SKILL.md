@@ -1,5 +1,10 @@
 ---
-description: Guide for working with the @totto2727/fp package — a TypeScript functional programming utility library that re-exports and bridges Effect, option-t, and other FP libraries. Use when modifying, extending, or consuming @totto2727/fp modules.
+name: totto2727-fp
+description: >-
+  Guide for working with the @totto2727/fp package — a TypeScript functional
+  programming utility library that re-exports and bridges Effect, option-t,
+  and other FP libraries. Use when modifying, extending, or consuming
+  @totto2727/fp modules.
 ---
 
 # @totto2727/fp
