@@ -1,8 +1,3 @@
----
-name: git-operations-rules
-description: Critical rules for git operations. Enforces git unstage, git undo, and git stash push/apply usage. MUST ALWAYS be applied when performing git operations like staging, unstaging, undoing commits, or stashing changes.
----
-
 # Git Operations Rules
 
 ## Rule (CRITICAL)
@@ -42,8 +37,3 @@ Before stashing, stage any new (untracked) files with `git add` so they are trac
 git add <new-files>
 git stash push -m "<message>" -- <paths>
 ```
-
-## Related Skills
-
-- [git-commit](../git-commit/SKILL.md) - Use when creating git commits
-- [file-deletion-rules](../file-deletion-rules/SKILL.md) - Use when deleting files

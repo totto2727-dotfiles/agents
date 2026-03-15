@@ -1,8 +1,3 @@
----
-name: cloudflare-markdown
-description: Renders web pages or raw HTML content to Markdown using Cloudflare Browser Rendering API. Use when converting URLs or HTML to Markdown format.
----
-
 # Cloudflare Markdown Rendering
 
 Renders web pages or raw HTML content to Markdown using Cloudflare Browser Rendering API.

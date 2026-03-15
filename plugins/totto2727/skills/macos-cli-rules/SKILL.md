@@ -1,9 +1,12 @@
 ---
-name: use-gnu-coreutils
-description: Enforces using GNU coreutils commands with 'g' prefix instead of Mac default BSD commands. Prohibits using Mac standard commands. MUST ALWAYS be applied when using coreutils commands like ls, find, sed, awk, grep, etc.
+name: macos-cli-rules
+description: >-
+  Enforces GNU coreutils with 'g' prefix on macOS instead of BSD defaults.
+  Includes grealpath for path calculations. MUST ALWAYS be applied when using
+  coreutils commands (ls, find, sed, awk, grep, realpath, etc.) on macOS.
 ---
 
-# Use GNU Coreutils with 'g' Prefix
+# macOS CLI Rules
 
 ## Rule (CRITICAL)
 
@@ -37,7 +40,6 @@ description: Enforces using GNU coreutils commands with 'g' prefix instead of Ma
 | `gcut`            | `cut`                        | Cut fields                      |
 | `gtr`             | `tr`                         | Translate characters            |
 | `gxargs`          | `xargs`                      | Build and execute commands      |
-| `grealpath`       | `realpath`                   | Resolve absolute paths          |
 | `gstat`           | `stat`                       | Display file status             |
 | `greadlink`       | `readlink`                   | Read symbolic links             |
 | `gln`             | `ln`                         | Create links                    |
@@ -64,9 +66,6 @@ gsed -i 's/old/new/g' file.txt
 # Pattern matching with GNU grep
 ggrep -r "pattern" .
 
-# Path operations with GNU realpath
-grealpath --relative-to=/base /target
-
 # File operations
 gcp source.txt dest.txt
 gmv old.txt new.txt
@@ -81,7 +80,6 @@ ls -la
 find . -name "*.ts"
 sed -i '' 's/old/new/g' file.txt
 grep -r "pattern" .
-realpath file.txt
 cp source.txt dest.txt
 ```
 
@@ -123,14 +121,57 @@ gfind . -type f -name "*.ts" -exec ggrep -l "pattern" {} \;
 gfind . -name "*.log" -mtime +30 -delete
 ```
 
-### Path Operations
+## grealpath: Path Operations
+
+**ALWAYS** use `grealpath` for:
+
+- Calculating relative paths between files/directories
+- Converting relative paths to absolute paths
+- Resolving symbolic links to absolute paths
+
+**NEVER** manually calculate relative paths, use `cd`/`pwd` combinations, or use string manipulation for paths.
+
+### Relative Path Calculation
+
+Use `grealpath --relative-to=<base>` to calculate relative paths:
 
 ```bash
-# Get absolute path
-grealpath ./file.txt
+# Calculate relative path from base directory to target
+grealpath --relative-to=/home/user /home/user/test
+# Output: test
 
-# Get relative path
-grealpath --relative-to=/base /target
+# Calculate relative path from current directory
+grealpath --relative-to=. ./subdir/file.txt
+# Output: subdir/file.txt
+
+# Calculate relative path between two specific paths
+grealpath --relative-to=/path/to/base /path/to/base/subdir/file.txt
+# Output: subdir/file.txt
+```
+
+### Absolute Path Conversion
+
+```bash
+# Convert relative path to absolute path
+grealpath ./subdir/file.txt
+# Output: /home/user/project/subdir/file.txt
+
+# Resolve symbolic links to absolute paths
+grealpath symlink
+# Output: /home/user/project/actual/path
+```
+
+### Common Use Cases
+
+```bash
+# From file A to file B
+grealpath --relative-to=/path/to/fileA /path/to/fileB
+
+# Simple conversion
+grealpath relative/path/to/file
+
+# Resolve all symbolic links
+grealpath symlink
 ```
 
 ## Installation Note
@@ -149,3 +190,5 @@ After installation, commands are available with `g` prefix.
 - Better compatibility with Linux systems
 - More features and options than BSD versions
 - Consistent behavior in scripts across different environments
+- `grealpath` requires GNU coreutils (the `--relative-to` option is not available in BSD `realpath`)
+- Paths are normalized (removes `.` and `..` components)

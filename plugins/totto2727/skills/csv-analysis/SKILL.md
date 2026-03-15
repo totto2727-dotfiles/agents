@@ -1,6 +1,9 @@
 ---
-name: csv-analyzing
-description: Guide for querying and filtering CSV files using DuckDB SQL
+name: csv-analysis
+description: >-
+  Guide for querying and filtering CSV files using DuckDB SQL. Use when
+  analyzing CSV files, querying tabular data, or filtering rows/columns
+  with SQL.
 context: fork
 ---
 

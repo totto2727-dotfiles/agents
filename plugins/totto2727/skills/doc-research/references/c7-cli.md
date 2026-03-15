@@ -1,10 +1,3 @@
----
-name: c7
-description: Use when fetching library documentation via the c7 CLI tool. Triggers on tasks involving "c7 search", "c7 context", or when doc-research delegates to c7 CLI for library lookups.
-context: fork
-allowed-tools: Bash
----
-
 # c7 CLI
 
 Fetch library documentation using the `c7` CLI tool (`~/.local/bin/c7`).

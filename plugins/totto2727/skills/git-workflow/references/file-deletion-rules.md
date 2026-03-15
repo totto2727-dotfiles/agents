@@ -1,8 +1,3 @@
----
-name: file-deletion-rules
-description: Enforces using git stash before file deletion and prohibits direct rm/unlink commands. Use when deleting files, cleaning up codebase, or removing tracked/untracked files. MUST ALWAYS be applied when file deletion is needed.
----
-
 # File Deletion Rules
 
 ## Rule (CRITICAL)
@@ -13,13 +8,15 @@ description: Enforces using git stash before file deletion and prohibits direct 
 
 **ALWAYS** use git stash before deleting files to preserve them.
 
-**Apply without confirmation**: When file deletion is needed, follow this rule without asking the user for confirmation. Execute the deletion process defined below.
+**Before performing destructive file operations, confirm the target files with the user if the scope is large (>5 files).**
+
+**Apply without confirmation for small scope**: When file deletion involves 5 or fewer files, follow this rule without asking the user for confirmation. Execute the deletion process defined below.
 
 ## Prohibited Commands
 
 The following commands are **strictly prohibited**:
 
-- `rm` (any variant: `rm -rf`, `rm -f`, etc.)
+- `rm` (any variant)
 - `unlink`
 - Any direct file deletion without git stash
 
@@ -34,6 +31,14 @@ The following commands are **strictly prohibited**:
    ```
 
 2. Remove file from git:
+
+   ```bash
+   git rm <files>
+   ```
+
+### For Unmodified Files (Tracked & Unmodified)
+
+1. Remove file from git:
 
    ```bash
    git rm <files>
@@ -80,7 +85,7 @@ Files: src/components/legacy/" -- src/components/legacy/
 
 ## Complete Examples
 
-### Good: Deleting Modified File
+### Deleting Modified File
 
 ```bash
 # Step 1: Save to stash
@@ -91,7 +96,7 @@ Files: utils/old-helper.js" -- utils/old-helper.js
 git rm utils/old-helper.js
 ```
 
-### Good: Deleting Untracked File
+### Deleting Untracked File
 
 ```bash
 # Step 1: Stage file
@@ -102,7 +107,7 @@ git stash push -m "[Deletion] Remove temporary file
 Files: temp-file.js" -- temp-file.js
 ```
 
-### Good: Deleting Multiple Files
+### Deleting Multiple Files
 
 ```bash
 # Save all files to stash
@@ -113,22 +118,9 @@ Files: module1.js, module2.js, module3.js" -- module1.js module2.js module3.js
 git rm module1.js module2.js module3.js
 ```
 
-### Bad: Direct Deletion
-
-```bash
-# DO NOT USE
-rm file.js
-rm -rf directory/
-unlink file.js
-```
-
 ## Notes
 
 - Files saved to git stash can be recovered later if needed
 - Use descriptive reasons in stash messages for future reference
 - The stash preserves file contents even after deletion
 - List all files in the stash message for clarity
-
-## Related Skills
-
-- [git-operations-rules](../git-operations-rules/SKILL.md) - General git operation rules (unstage, undo, stash)

@@ -1,17 +1,11 @@
----
-name: branch-split-and-pr
-description: Splits current changes into multiple branches, commits per plan, pushes, and creates PRs. Outputs a markdown list of PR URLs. Use when splitting work into multiple branches for separate PRs, when following a branch-split plan, or when the user requests multi-branch PR workflow. References git-commit-granular for commit message rules.
-context: fork
----
-
 # Branch Split and PR Workflow
 
-A workflow for splitting changes into multiple branches and submitting PRs for each. The plan must strictly follow the [plan-template.md](plan-template.md) included in this skill.
+A workflow for splitting changes into multiple branches and submitting PRs for each. The plan must strictly follow the [plan-template.md](../assets/plan-template.md) included in this skill.
 
-## Referenced Skills
+## Referenced Rules
 
-- **Commit messages & granularity**: Follow [git-commit](../git-commit/SKILL.md)
-- **Stash / unstage**: Follow [git-operations-rules](../git-operations-rules/SKILL.md)
+- **Commit messages & granularity**: Follow [commit-rules.md](commit-rules.md)
+- **Stash / unstage**: Follow [operations-rules.md](operations-rules.md)
 
 ## Phase 1: Create and Review the Plan
 
@@ -26,7 +20,7 @@ A workflow for splitting changes into multiple branches and submitting PRs for e
    - Excluded files list
    - Note that work should be halted and instructions requested on error
 
-Edit the plan template from [plan-template.md](./assets/plan-template.md) to match the project's changes.
+Edit the plan template from [plan-template.md](../assets/plan-template.md) to match the project's changes.
 
 ## Phase 2: Execute Per Branch (Strictly Follow)
 
@@ -59,7 +53,7 @@ git commit -m "<commit-message>"
 - Use `git switch` instead of `git checkout`
 - Stash messages should clearly identify the work unit, e.g., `wip: changes for <branch-name>`
 - Restore using `git stash apply stash@{0}` to explicitly target the latest stash
-- Commits must follow Conventional Commits and granularity rules from [git-commit](../git-commit/SKILL.md)
+- Commits must follow Conventional Commits and granularity rules from [commit-rules.md](commit-rules.md)
 
 ### Notes
 
@@ -95,7 +89,7 @@ After all PRs are created, present the following markdown format to the user (cl
 
 ## Plan Template
 
-See [plan-template.md](./assets/plan-template.md) for the detailed template and step examples. Structure includes:
+See [plan-template.md](../assets/plan-template.md) for the detailed template and step examples. Structure includes:
 
 - Overview & rules (separate branches for new items, include existing modifications in related PRs, halt on error)
 - File dependency table (group, target files, dependent mocks, type)

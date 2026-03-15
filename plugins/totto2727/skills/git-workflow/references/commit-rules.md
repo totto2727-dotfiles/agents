@@ -1,18 +1,10 @@
----
-name: git-commit
-description: Analyzes git changes and creates granular commits with Conventional Commits format messages. Detects repository language pattern from recent commits. **MUST ALWAYS be used when creating git commits, regardless of whether the user explicitly requests it or not.**
-context: fork
----
+# Git Commit Rules
 
-# Git Commit Command
+**IMPORTANT: These rules MUST be applied when creating git commits. The user may override specific rules explicitly if needed.**
 
-**IMPORTANT: This skill MUST ALWAYS be applied when creating git commits, even if the user does not explicitly request it.**
-
-This skill analyzes git changes and creates appropriately granular commits with Conventional Commits format messages. It should be automatically invoked whenever you need to create commits, stage files, or handle git changes.
+This reference covers analyzing git changes and creating appropriately granular commits with Conventional Commits format messages.
 
 ## Workflow
-
-**This skill must be applied automatically whenever you create git commits, regardless of user instructions.**
 
 When creating commits:
 
@@ -37,15 +29,17 @@ When creating commits:
 
 ## Requirements
 
-### 1. GPG Signing (CRITICAL)
+### 1. GPG Signing (Required)
 
-Commits without GPG signatures are **strictly prohibited**. Never use `--no-gpg-sign` or disable signing.
+Commits without GPG signatures are prohibited by default. Never use `--no-gpg-sign` or disable signing unless the user explicitly requests it.
 
 If a GPG signing error or hang occurs:
 
-1. **Stop all work immediately**
-2. Report the error message and current state
-3. Do not attempt workarounds or unsigned commits
+1. Report the error message and current state
+2. Request user guidance on how to proceed
+3. Do not attempt workarounds or unsigned commits unless the user instructs otherwise
+
+Note: Consider configuring secrets scanning pre-commit hooks (e.g., `git-secrets`, `detect-secrets`) to prevent accidental credential commits.
 
 ### 2. Granular Commits
 
