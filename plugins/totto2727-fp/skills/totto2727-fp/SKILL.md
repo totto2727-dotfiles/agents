@@ -27,38 +27,25 @@ Unified TypeScript functional programming utility library. Re-exports multiple F
 
 ### Custom Modules
 
-| Export Path           | Description                                                                 |
-| --------------------- | --------------------------------------------------------------------------- |
-| `./duration`          | Locale-aware duration formatting with caching                               |
-| `./effect/cuid`       | CUID generator with Effect Schema validation and branded types              |
-| `./effect/util`       | Effect utility types and helpers (`EffectFn`, `nonEmptyArrayOrNone`, `tap`) |
-| `./effect/option-t`   | Bridge: option-t `Result` → Effect `Exit`                                   |
-| `./option-t/effect`   | Bridge: Effect `Exit` → option-t `Result` (dual function)                   |
-| `./option-t/safe-try` | Rust-like `?` operator for option-t Result using generators                 |
-| `./effect/test/bun`   | Bun test wrapper for Effect (`it.effect()`, `it.scoped()`)                  |
-
-### Effect Platform Modules
-
-| Export Path                     | Source                                    |
-| ------------------------------- | ----------------------------------------- |
-| `./effect/platform`             | @effect/platform                          |
-| `./effect/platform/browser`     | @effect/platform-browser                  |
-| `./effect/platform/bun`         | @effect/platform-bun                      |
-| `./effect/platform/node`        | @effect/platform-node                     |
-| `./effect/platform/node-share`  | @effect/platform-node-shared (namespaced) |
-| `./effect/cli`                  | @effect/cli                               |
-| `./effect/experimental/machine` | @effect/experimental Machine module       |
-| `./effect/test/vitest`          | @effect/vitest                            |
+| Export Path           | Description                                                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `./duration`          | Locale-aware duration formatting with caching                                                                           |
+| `./effect/cuid`       | CUID generator with Effect Schema validation and branded types                                                          |
+| `./effect/util`       | Effect utility types and helpers (`EffectFnSuccess`, `EffectFnError`, `EffectFnServices`, `nonEmptyArrayOrNone`, `tap`) |
+| `./effect/option-t`   | Bridge: option-t `Result` → Effect `Exit`                                                                               |
+| `./option-t/effect`   | Bridge: Effect `Exit` → option-t `Result` (dual function)                                                               |
+| `./option-t/safe-try` | Rust-like `?` operator for option-t Result using generators                                                             |
 
 ### TypeScript Config Exports
 
-Paths: `./tsconfig/base`, `./tsconfig/node22`, `./tsconfig/node24`, `./tsconfig/bun`, `./tsconfig/lib`, `./tsconfig/react`, `./tsconfig/react-router`, `./tsconfig/expo`, `./tsconfig/tanstack-start`
+| Export Path       | Description           |
+| ----------------- | --------------------- |
+| `./tsconfig/vite` | Vite project tsconfig |
 
 ## Key Patterns
 
 - **Re-export strategy**: Most modules are thin re-exports (`export * from "library"`). Custom logic exists only in bridge modules, CUID, duration, and test helpers.
 - **Effect/option-t bridge**: Bidirectional conversion between Effect `Exit` and option-t `Result` via `./effect/option-t` and `./option-t/effect`.
-- **Platform separation**: Effect platform modules are split by runtime (browser, bun, node) to enable tree-shaking.
 - **Branded types**: CUID uses Effect Schema branding for type-safe ID handling.
 
 ## Dependencies Reference
@@ -69,14 +56,6 @@ Paths: `./tsconfig/base`, `./tsconfig/node22`, `./tsconfig/node24`, `./tsconfig/
   - [llms.txt](https://effect.website/llms.txt)
   - [llms-full.txt](https://effect.website/llms-full.txt)
   - [llms-small.txt](https://effect.website/llms-small.txt)
-- **@effect/cli** — CLI argument parsing for Effect
-- **@effect/platform** — Platform abstraction layer for Effect
-- **@effect/platform-browser** — Browser platform implementation
-- **@effect/platform-bun** — Bun runtime platform implementation
-- **@effect/platform-node** — Node.js platform implementation
-- **@effect/platform-node-shared** — Shared Node.js utilities
-- **@effect/experimental** — Experimental Effect features (Machine module)
-- **@effect/vitest** — Vitest integration for Effect testing
 
 ### Utility Libraries
 
