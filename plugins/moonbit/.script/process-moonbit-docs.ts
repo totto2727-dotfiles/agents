@@ -1,3 +1,14 @@
+// Fetches MoonBit official documentation markdown and generates skill reference files.
+//
+// Source pages:
+//   - Language: https://docs.moonbitlang.com/en/latest/language/index.html
+//   - Toolchain: https://docs.moonbitlang.com/en/latest/toolchain/index.html
+//
+// Download links (pass these as arguments):
+//   sfw deno run --allow-net --allow-read --allow-write .script/process-moonbit-docs.ts \
+//     https://docs.moonbitlang.com/en/latest/_downloads/78d8998d78e60fd7b1b2f4c9bb2819fb/summary.md \
+//     https://docs.moonbitlang.com/en/latest/_downloads/7e67a7065021137fc80a2750bac9ee32/summary.md
+
 import { join } from "jsr:@std/path@1.1.4";
 
 const urls = Deno.args;
@@ -120,12 +131,21 @@ for (const section of sections) {
 const introSection = sections.find((s) => s.path === "language/introduction.md");
 const links = otherFiles.map((f) => `- [${f.title}](./${f.filename})`).join("\n");
 
+const relatedSkillsBlock = `## Related Skills
+
+- [moonbit-bestpractice](../moonbit-bestpractice/SKILL.md) — MoonBit coding standards and best practices. Use when writing, reviewing, or refactoring MoonBit code.`;
+
 const skillContent = `---
 name: moonbit-docs
-description: MoonBit language reference covering syntax, types, functions, methods, and deriving. Use when writing MoonBit code, debugging MoonBit programs, or answering questions about MoonBit syntax and features.
+description: >-
+  MoonBit language reference covering syntax, types, functions, methods, and
+  deriving. Use when writing MoonBit code, debugging MoonBit programs, or
+  answering questions about MoonBit syntax and features.
 ---
 
 ${licenseHeader}
+
+${relatedSkillsBlock}
 
 ${introSection?.content ?? ""}
 

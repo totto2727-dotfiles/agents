@@ -1,9 +1,15 @@
 ---
 name: moonbit-bestpractice
-description: MoonBit (.mbt) coding standards and best practices. Use when writing, reviewing, or refactoring MoonBit code.
+description: >-
+  MoonBit (.mbt) coding standards and best practices. Use when writing,
+  reviewing, or refactoring MoonBit code.
 ---
 
 # MoonBit Coding Standards
+
+## Related Skills
+
+- [moonbit-docs](../moonbit-docs/SKILL.md) — MoonBit language reference (syntax, types, functions, methods, deriving). Use for language questions and debugging.
 
 ## 1. Documentation
 
@@ -302,4 +308,4 @@ declare fn add(x : Int, y : Int) -> Int
 
 ## 6. Testing
 
-See [MoonBit Testing Standards](./moonbit-test.md) for detailed testing guidelines.
+See [MoonBit Testing Standards](./references/moonbit-test.md) for detailed testing guidelines.

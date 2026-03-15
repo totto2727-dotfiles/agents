@@ -1,6 +1,9 @@
 ---
 name: moonbit-docs
-description: MoonBit language reference covering syntax, types, functions, methods, and deriving. Use when writing MoonBit code, debugging MoonBit programs, or answering questions about MoonBit syntax and features.
+description: >-
+  MoonBit language reference covering syntax, types, functions, methods, and
+  deriving. Use when writing MoonBit code, debugging MoonBit programs, or
+  answering questions about MoonBit syntax and features.
 ---
 
 <!-- Derived from MoonBit documentation by moonbitlang -->
@@ -8,6 +11,10 @@ description: MoonBit language reference covering syntax, types, functions, metho
 <!-- Prose content (post July 4, 2024): CC BY-SA 4.0 -->
 <!-- Code examples: Apache 2.0 -->
 <!-- Modifications: Extracted and reformatted as Claude Code skill files -->
+
+## Related Skills
+
+- [moonbit-bestpractice](../moonbit-bestpractice/SKILL.md) — MoonBit coding standards and best practices. Use when writing, reviewing, or refactoring MoonBit code.
 
 ## Introduction
 
