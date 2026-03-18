@@ -1,11 +1,11 @@
 ---
 name: git-workflow
 description: >-
-  Unified git workflow rules including Conventional Commits with GPG signing,
-  staging/unstaging/stash operations, file deletion via git stash, and
-  multi-branch PR splitting. MUST ALWAYS be applied when performing any git
-  operations: committing, staging, unstaging, stashing, deleting files, or
-  splitting work into branches.
+  MUST ALWAYS be loaded before executing ANY git command (commit, add, stash,
+  push, pull, checkout, merge, rebase, reset, rm, diff, log, etc.). Covers
+  Conventional Commits with GPG signing, staging/unstaging/stash rules, safe
+  file deletion via git stash, multi-branch PR splitting, and command execution
+  discipline. If the task involves git in any way, load this skill first.
 context: fork
 ---
 
@@ -84,6 +84,10 @@ Use format: `type(scope): description`
 
 Analyze recent commit messages from `git log --oneline -10` to determine the language pattern used in the repository. Follow the same language for new commit messages.
 
+### Prohibited Commands
+
+- **`git reset` is prohibited** — use `git unstage` or `git undo` instead (see [references/operations-rules.md](references/operations-rules.md))
+
 ### Staging Operations
 
 - Use `git unstage` to reset the staging area (no options)
@@ -102,6 +106,12 @@ Analyze recent commit messages from `git log --oneline -10` to determine the lan
 
 - On conflicts, push failures, or git errors: halt work, report the current state, and request instructions
 - Do not attempt to resolve errors autonomously
+
+### Command Execution
+
+- Execute git commands one at a time — do not chain with `&&`
+- Pipes (`|`) and command substitution (`$(...)`) within a single git command are allowed
+- This ensures each command's exit status is verified before proceeding to the next
 
 ## Reference Files
 
