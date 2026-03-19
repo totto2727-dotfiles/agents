@@ -1,9 +1,11 @@
 ---
 name: deno-cli-tool
 description: >-
-  Rules for creating single-file CLI tools with Deno and TypeScript. Covers
-  shebang setup, argument parsing with Effect CLI, and installation conventions.
-  MUST be applied when building CLI tools or command-line utilities.
+  This skill should be used when creating single-file CLI tools with Deno and TypeScript.
+  Relevant when the user asks to build a CLI tool, create a command-line utility,
+  or set up argument parsing with Effect CLI.
+  Common triggers: "create CLI tool", "build command-line app", "deno CLI",
+  "Effect CLI", "argument parsing".
 ---
 
 # Deno CLI Tool
@@ -53,6 +55,26 @@ Common flags: `--allow-read`, `--allow-write`, `--allow-net`, `--allow-env`, `--
 
 ```bash
 chmod +x my-tool.ts
+```
+
+## Effect CLI Basic Pattern
+
+A minimal Effect CLI tool with a single command:
+
+```typescript
+#!/usr/bin/env -S deno run --allow-read
+import { Console, Effect } from "jsr:@totto2727/fp@3.0/effect";
+import { Args, Command } from "jsr:@totto2727/fp@3.0/effect/cli";
+import { NodeContext, NodeRuntime } from "jsr:@totto2727/fp@3.0/effect/platform/node";
+import * as process from "node:process";
+
+const name = Args.text({ name: "name" });
+
+const main = Command.make("greet", { name }, ({ name }) => Console.log(`Hello, ${name}!`));
+
+const cli = Command.run(main, { name: "greet", version: "0.1.0" });
+
+cli(process.argv).pipe(Effect.provide(NodeContext.layer), NodeRuntime.runMain);
 ```
 
 ## Template

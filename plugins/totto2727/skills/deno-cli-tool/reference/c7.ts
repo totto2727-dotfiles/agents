@@ -1,4 +1,4 @@
-#!/usr/bin/env deno run --allow-env --allow-net --allow-read --allow-ffi
+#!/usr/bin/env -S deno run --allow-env --allow-net --allow-read --allow-ffi
 // Based on https://github.com/quiint/c7 (MIT License)
 
 import { Console, Effect, Schema } from "jsr:@totto2727/fp@3.0/effect";
