@@ -26,17 +26,25 @@ git add file.txt && git commit -m "feat: add file"
 
 Do not use `git -C <path>`. Always `cd` to the repository directory first, or use absolute paths within the current working directory.
 
-### git unstage
+### Prohibited: `git reset`
+
+Do not use `git reset` in any form. Use the custom aliases below instead.
+
+### git unstage (Custom Alias)
 
 Use `git unstage` to reset the staging area. Do not pass any options.
+
+This is a custom git alias expected to be defined as: `git config --global alias.unstage 'reset HEAD --'`
 
 ```bash
 git unstage
 ```
 
-### git undo
+### git undo (Custom Alias)
 
 Use `git undo` to undo the last commit. Do not pass any options.
+
+This is a custom git alias expected to be defined as: `git config --global alias.undo 'reset --soft HEAD~1'`
 
 ```bash
 git undo
@@ -47,7 +55,7 @@ git undo
 Do not use shorthand. Use explicit commands:
 
 - To save changes: `git stash push` (not `git stash`)
-- To restore: `git stash apply` (not `git stash pop`)
+- To restore: `git stash apply` (not `git stash pop`) — `apply` keeps the stash entry intact, allowing safe retry if the apply causes conflicts
 
 Before stashing, stage any new (untracked) files with `git add` so they are tracked; otherwise they will not be included in the stash.
 

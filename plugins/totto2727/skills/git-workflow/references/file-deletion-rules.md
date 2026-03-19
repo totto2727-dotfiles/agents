@@ -38,6 +38,8 @@ The following commands are **strictly prohibited**:
 
 ### For Unmodified Files (Tracked & Unmodified)
 
+Stash is not required for unmodified tracked files because their content is already preserved in the commit history and can be recovered with `git checkout <commit> -- <file>`.
+
 1. Remove file from git:
 
    ```bash

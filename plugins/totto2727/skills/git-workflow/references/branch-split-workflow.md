@@ -65,7 +65,7 @@ git commit -m "<commit-message>"
 For each branch:
 
 1. `git push -u origin <branch-name>`
-2. `gh pr create --base develop --title "<title>" --body "<body>" --assignee @me`
+2. `gh pr create --base <base-branch> --title "<title>" --body "<body>" --assignee @me` (use the repository's default branch or the branch specified in the plan)
 
 PR body should follow the repository's PR template. Title should be a concise description of the changes.
 

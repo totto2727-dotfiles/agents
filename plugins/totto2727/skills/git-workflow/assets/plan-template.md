@@ -35,31 +35,7 @@ A plan for splitting current changes into separate branches by unit.
 
 ## Git Workflow (Strictly Follow)
 
-Follow this flow strictly when creating each branch.
-
-**Note**: If conflicts or errors occur, halt work immediately and request instructions.
-
-```bash
-# 1. Stage all changes (required to include new files in stash)
-git add .
-
-# 2. Save to stash (with a message identifying the work)
-git stash push -m "wip: changes for <branch-name>"
-
-# 3. Switch to base branch & create new branch
-git switch -f <base-branch>
-git switch -c <branch-name>
-
-# 4. Restore stash
-git stash apply stash@{0}
-
-# 5. Unstage all
-git unstage
-
-# 6. Add only the files to commit and commit
-git add <file1> <file2> ...
-git commit -m "<commit-message>"
-```
+Follow the common per-branch workflow defined in [branch-split-workflow.md](../references/branch-split-workflow.md#common-workflow-per-branch). If conflicts or errors occur, halt work immediately and request instructions.
 
 ---
 
@@ -69,14 +45,14 @@ git commit -m "<commit-message>"
 
 **Purpose**: (purpose of this branch)
 
-**Base Branch**: `develop` (change as needed)
+**Base Branch**: (repository's default branch)
 
 #### Preparation
 
 ```bash
 git add .
 git stash push -m "wip: changes for test/<name1>"
-git switch -f develop
+git switch -f <base-branch>
 git switch -c test/<name1>
 git stash apply stash@{0}
 git unstage
@@ -102,14 +78,14 @@ git commit -m "<type>(scope): <message>"
 
 **Purpose**: (purpose of this branch)
 
-**Base Branch**: `develop`
+**Base Branch**: (repository's default branch)
 
 #### Preparation
 
 ```bash
 git add .
 git stash push -m "wip: changes for test/<name2>"
-git switch -f develop
+git switch -f <base-branch>
 git switch -c test/<name2>
 git stash apply stash@{0}
 git unstage
@@ -129,7 +105,7 @@ git commit -m "<type>(scope): <message>"
 ## Dependency Diagram
 
 ```txt
-develop
+<base-branch>
 ├── test/<name1> (independent or dependency description)
 ├── test/<name2> (independent)
 └── ...

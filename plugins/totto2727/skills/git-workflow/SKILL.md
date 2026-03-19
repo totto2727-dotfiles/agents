@@ -1,11 +1,11 @@
 ---
 name: git-workflow
 description: >-
-  MUST ALWAYS be loaded before executing ANY git command (commit, add, stash,
-  push, pull, checkout, merge, rebase, reset, rm, diff, log, etc.). Covers
-  Conventional Commits with GPG signing, staging/unstaging/stash rules, safe
-  file deletion via git stash, multi-branch PR splitting, and command execution
-  discipline. If the task involves git in any way, load this skill first.
+  Unified git workflow covering Conventional Commits with GPG signing,
+  staging/unstaging/stash rules, safe file deletion via git stash,
+  multi-branch PR splitting, and command execution discipline.
+  Triggers on: commit, add, stash, push, pull, checkout, merge, rebase,
+  reset, rm, diff, log, branch, switch, or any other git operation.
 ---
 
 # Git Workflow
@@ -57,60 +57,13 @@ Follow [references/branch-split-workflow.md](references/branch-split-workflow.md
 
 ## Universal Rules
 
-These rules apply to ALL git operations without exception:
+These rules apply to ALL git operations without exception. Details are in the reference files above.
 
-### GPG Signing (Required)
-
-All commits must be GPG-signed. Never use `--no-gpg-sign` or disable signing. The user may override this requirement explicitly if needed.
-
-If a GPG signing error or hang occurs:
-
-1. Report the error message and current state
-2. Request user guidance on how to proceed
-3. Do not attempt workarounds or unsigned commits unless the user instructs otherwise
-
-### Conventional Commits Format
-
-Use format: `type(scope): description`
-
-**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, `ci`, `perf`
-
-**Scope**: Optional, indicates what is being modified (e.g., `auth`, `cart`)
-
-**Description**: Concise, present tense, lowercase (except proper nouns)
-
-### Language Detection
-
-Analyze recent commit messages from `git log --oneline -10` to determine the language pattern used in the repository. Follow the same language for new commit messages.
-
-### Prohibited Commands
-
-- **`git reset` is prohibited** — use `git unstage` or `git undo` instead (see [references/operations-rules.md](references/operations-rules.md))
-
-### Staging Operations
-
-- Use `git unstage` to reset the staging area (no options)
-- Use `git undo` to undo the last commit (no options)
-- Use `git stash push -m "<message>"` to save changes (never shorthand)
-- Use `git stash apply` to restore (never `git stash pop`)
-- Do not use `git -C <path>` — always work from the repository directory
-
-### File Deletion Safety
-
-- Never use `rm`, `unlink`, or any direct file deletion
-- Always use git stash to preserve files before deletion
-- Before performing destructive file operations on a large scope (>5 files), confirm the target files with the user
-
-### Error Handling
-
-- On conflicts, push failures, or git errors: halt work, report the current state, and request instructions
-- Do not attempt to resolve errors autonomously
-
-### Command Execution
-
-- Execute git commands one at a time — do not chain with `&&`
-- Pipes (`|`) and command substitution (`$(...)`) within a single git command are allowed
-- This ensures each command's exit status is verified before proceeding to the next
+- **GPG signing required** — never use `--no-gpg-sign`; on error, halt and report (see [commit-rules.md](references/commit-rules.md))
+- **`git reset` is prohibited** — use `git unstage` or `git undo` instead (see [operations-rules.md](references/operations-rules.md))
+- **No direct file deletion** — always stash before deleting (see [file-deletion-rules.md](references/file-deletion-rules.md))
+- **One command at a time** — no `&&` chaining; pipes and `$(...)` within a single command are allowed (see [operations-rules.md](references/operations-rules.md))
+- **Error handling** — on conflicts, push failures, or git errors: halt, report current state, and request instructions
 
 ## Reference Files
 

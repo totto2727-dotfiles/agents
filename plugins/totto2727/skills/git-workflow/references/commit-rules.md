@@ -39,8 +39,6 @@ If a GPG signing error or hang occurs:
 2. Request user guidance on how to proceed
 3. Do not attempt workarounds or unsigned commits unless the user instructs otherwise
 
-Note: Consider configuring secrets scanning pre-commit hooks (e.g., `git-secrets`, `detect-secrets`) to prevent accidental credential commits.
-
 ### 2. Granular Commits
 
 Create separate commits for logically distinct changes. Do not combine unrelated modifications into a single commit.
@@ -125,9 +123,9 @@ feat(product): implement search functionality
 
 ```txt
 Recent commits show Japanese messages:
-- feat: add authentication feature
-- fix: fix cart calculation bug
+- feat: 認証機能を追加
+- fix: カート計算のバグを修正
 
 Follows detected pattern:
-- feat: add product search functionality
+- feat: 商品検索機能を実装
 ```
