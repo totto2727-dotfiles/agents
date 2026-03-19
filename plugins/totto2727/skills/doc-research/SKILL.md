@@ -1,10 +1,11 @@
 ---
 name: doc-research
 description: >-
-  Performs prioritized documentation research using c7.ts CLI, WebSearch, and
-  Cloudflare Browser Rendering. Use when searching documentation, looking up
-  API references, fetching library docs via c7.ts, or converting URLs/HTML to
-  Markdown format.
+  This skill should be used when researching documentation or looking up API references.
+  Relevant when the user asks to find docs, look up a library API, fetch official
+  documentation, or convert web pages to Markdown.
+  Common triggers: "look up docs", "find documentation", "API reference",
+  "search docs for", "how does X work in library Y".
 ---
 
 # Documentation Research

@@ -101,13 +101,13 @@ fi
 JSON_PARTS=()
 
 if [[ -n "$URL" ]]; then
-  JSON_PARTS+=("\"url\": $(jq -Rs . <<< "$URL")")
+  JSON_PARTS+=("\"url\": $(printf '%s' "$URL" | jq -Rs .)")
 else
-  JSON_PARTS+=("\"html\": $(jq -Rs . <<< "$HTML")")
+  JSON_PARTS+=("\"html\": $(printf '%s' "$HTML" | jq -Rs .)")
 fi
 
 if [[ -n "$WAIT_UNTIL" ]]; then
-  JSON_PARTS+=("\"gotoOptions\": {\"waitUntil\": $(jq -Rs . <<< "$WAIT_UNTIL")}")
+  JSON_PARTS+=("\"gotoOptions\": {\"waitUntil\": $(printf '%s' "$WAIT_UNTIL" | jq -Rs .)}")
 fi
 
 if [[ ${#REJECT_PATTERNS[@]} -gt 0 ]]; then
@@ -116,7 +116,7 @@ if [[ ${#REJECT_PATTERNS[@]} -gt 0 ]]; then
 fi
 
 if [[ -n "$USER_AGENT" ]]; then
-  JSON_PARTS+=("\"userAgent\": $(jq -Rs . <<< "$USER_AGENT")")
+  JSON_PARTS+=("\"userAgent\": $(printf '%s' "$USER_AGENT" | jq -Rs .)")
 fi
 
 JSON_BODY=$(IFS=,; echo "{${JSON_PARTS[*]}}")
