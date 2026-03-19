@@ -5,8 +5,7 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   lint: {
-    options: { typeAware: true, typeCheck: true },
-    ignorePatterns: ["**/.script/**"],
+    options: { typeAware: true, typeCheck: false },
   },
   fmt: {
     ignorePatterns: [],

@@ -1,5 +1,4 @@
 #!/usr/bin/env -S deno run --allow-env --allow-net --allow-read
-// @ts-nocheck -- Deno template script with JSR imports
 import { Console, Effect, Schema } from "jsr:@totto2727/fp@3.0/effect";
 import { Args, Command, Options } from "jsr:@totto2727/fp@3.0/effect/cli";
 import {
