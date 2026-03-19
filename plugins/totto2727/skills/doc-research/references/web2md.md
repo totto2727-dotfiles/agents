@@ -54,17 +54,3 @@ web2md.ts --url "https://example.com" --reject '/^.*\.(css)/'
 ```bash
 web2md.ts --url "https://example.com" --user-agent "Mozilla/5.0 (compatible; MyBot/1.0)"
 ```
-
-## Credentials
-
-Credentials are retrieved from macOS Keychain:
-
-- `CLOUDFLARE_ACCOUNT_ID` - Cloudflare account ID
-- `CLOUDFLARE_MARKDOWN_API_KEY` - Cloudflare API token with Browser Rendering permissions
-
-To store credentials:
-
-```bash
-security add-generic-password -s CLOUDFLARE_ACCOUNT_ID -a CLOUDFLARE_ACCOUNT_ID -w "your-account-id"
-security add-generic-password -s CLOUDFLARE_MARKDOWN_API_KEY -a CLOUDFLARE_MARKDOWN_API_KEY -w "your-api-token"
-```
