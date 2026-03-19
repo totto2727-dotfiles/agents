@@ -1,10 +1,11 @@
 ---
 name: script-rules
 description: >-
-  Script creation rules: prefer shell one-liners, use TypeScript with Deno
-  for complex logic, prohibit Node.js and Python. Includes Deno disposable
-  script conventions (npm:/jsr: imports, no URL imports). MUST ALWAYS be
-  applied when creating scripts or automation tasks.
+  This skill should be used when creating scripts or automation tasks.
+  Relevant when the user asks to write a shell script, create a Deno script,
+  automate a task, or run a one-liner.
+  Common triggers: "write a script", "automate this", "create a CLI script",
+  "shell one-liner", "deno script".
 ---
 
 # Script Rules
@@ -52,10 +53,10 @@ Use shell script one-liners for simple operations:
 find . -name "*.js" -type f | xargs grep "pattern"
 
 # Text processing
-cat file.txt | grep "pattern" | sed 's/old/new/g'
+grep "pattern" file.txt | sed 's/old/new/g'
 
 # File counting
-ls -1 | wc -l
+find . -maxdepth 1 -type f | wc -l
 
 # Directory operations
 mkdir -p path/to/dir && cd path/to/dir
@@ -109,10 +110,7 @@ Three principles for Deno scripts:
 #### Correct Import Format
 
 ```typescript
-// npm packages
-import { z } from "npm:zod@3.22.4";
-
-// jsr packages
+// jsr packages (preferred)
 import { Hono } from "jsr:@hono/hono@4.0.0";
 import { HttpException } from "jsr:@hono/hono@4.0.0/http-exception";
 
@@ -120,9 +118,9 @@ import { HttpException } from "jsr:@hono/hono@4.0.0/http-exception";
 import { join } from "jsr:@std/path@1.0.0";
 import { parse } from "jsr:@std/yaml@1.0.0";
 
-// npm packages
-import { Hono } from "npm:hono@4.0.0";
-import { HttpException } from "npm:hono@4.0.0/http-exception";
+// npm packages (when not available on jsr)
+import { z } from "npm:zod@3.22.4";
+import express from "npm:express@4.21.0";
 ```
 
 #### Incorrect Import Format

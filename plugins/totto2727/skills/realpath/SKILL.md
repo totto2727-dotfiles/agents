@@ -1,10 +1,11 @@
 ---
 name: realpath
 description: >-
-  Cross-platform path operations using realpath. On macOS, use `grealpath` (GNU
-  coreutils); on Linux, use `realpath` directly. MUST ALWAYS be applied when
-  calculating relative paths, converting to absolute paths, or resolving
-  symlinks.
+  This skill should be used when performing path operations across platforms.
+  Relevant when the user asks to calculate relative paths, convert to absolute
+  paths, or resolve symbolic links.
+  Common triggers: "relative path", "absolute path", "resolve symlink",
+  "realpath", "grealpath", "path calculation".
 ---
 
 # Cross-Platform Path Operations with realpath
@@ -56,19 +57,6 @@ realpath ./subdir/file.txt
 # Resolve symbolic links to absolute paths
 realpath symlink
 # Output: /home/user/project/actual/path
-```
-
-## Common Use Cases
-
-```bash
-# From file A to file B
-realpath --relative-to=/path/to/fileA /path/to/fileB
-
-# Simple conversion
-realpath relative/path/to/file
-
-# Resolve all symbolic links
-realpath symlink
 ```
 
 ## Key Notes
