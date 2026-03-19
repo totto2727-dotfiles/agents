@@ -1,9 +1,15 @@
 ---
 name: macos-cli-rules
 description: >-
-  Enforces GNU coreutils with 'g' prefix on macOS instead of BSD defaults. MUST
-  ALWAYS be applied when using coreutils commands (ls, find, sed, awk, grep,
-  etc.) on macOS. On Linux, use standard commands directly.
+  This skill must be loaded before executing any Bash tool command that involves
+  coreutils on macOS (Darwin). On macOS, all coreutils commands (ls, find, sed,
+  awk, grep, cat, cp, mv, rm, sort, head, tail, wc, cut, tr, xargs, stat,
+  readlink, realpath, etc.) require the GNU 'g' prefix (gls, gfind, gsed, etc.).
+  This skill applies whenever the platform is macOS/Darwin and shell commands
+  are being constructed or executed. Always check this skill before writing
+  Bash commands that use coreutils.
+  DO NOT use this skill on Linux — standard coreutils commands work directly
+  without any prefix on Linux/GNU systems.
 ---
 
 # macOS CLI Rules
@@ -55,71 +61,34 @@ description: >-
 ### Good: Using GNU Commands
 
 ```bash
-# List files with GNU ls
+# List files
 gls -la
 
-# Find files with GNU find
+# Find files
 gfind . -name "*.ts" -type f
 
-# Text processing with GNU sed
-gsed -i 's/old/new/g' file.txt
+# Find and process
+gfind . -name "*.log" -mtime +30 -delete
 
-# Pattern matching with GNU grep
-ggrep -r "pattern" .
+# Text processing
+gsed -i 's/old/new/g' file.txt
+ggrep -E "pattern1|pattern2" file.txt
+gawk '{print $1, $3}' file.txt
 
 # File operations
-gcp source.txt dest.txt
-gmv old.txt new.txt
+gcp -r source/ dest/
+gmv file.txt newdir/
 grm -rf directory/
 ```
 
-### Bad: Using Mac BSD Commands
+### Bad: Using Mac BSD Commands (PROHIBITED)
 
 ```bash
-# DO NOT USE Mac standard commands
 ls -la
 find . -name "*.ts"
 sed -i '' 's/old/new/g' file.txt
 grep -r "pattern" .
 cp source.txt dest.txt
-```
-
-## Common Patterns
-
-### File Operations
-
-```bash
-# Copy with GNU cp
-gcp -r source/ dest/
-
-# Move with GNU mv
-gmv file.txt newdir/
-
-# Remove with GNU rm
-grm -rf directory/
-```
-
-### Text Processing
-
-```bash
-# Search and replace with GNU sed
-gsed -i 's/pattern/replacement/g' file.txt
-
-# Pattern matching with GNU grep
-ggrep -E "pattern1|pattern2" file.txt
-
-# Process with GNU awk
-gawk '{print $1, $3}' file.txt
-```
-
-### File Finding
-
-```bash
-# Find files with GNU find
-gfind . -type f -name "*.ts" -exec ggrep -l "pattern" {} \;
-
-# Find and process
-gfind . -name "*.log" -mtime +30 -delete
 ```
 
 ## Path Operations
