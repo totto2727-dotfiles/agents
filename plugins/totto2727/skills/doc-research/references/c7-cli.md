@@ -1,13 +1,13 @@
 # c7 CLI
 
-Fetch library documentation using the `c7` CLI tool (`~/.local/bin/c7`).
+Fetch library documentation using the `c7.ts` CLI tool (`~/.local/bin/c7.ts`).
 
 ## Commands
 
 ### Search Libraries
 
 ```bash
-c7 search <libraryName> <query...>
+c7.ts search <libraryName> <query...>
 ```
 
 Returns matching library IDs.
@@ -15,19 +15,19 @@ Returns matching library IDs.
 ### Fetch Documentation Context
 
 ```bash
-c7 context <libraryId> <query...> -t txt
+c7.ts context <libraryId> <query...> -t txt
 ```
 
 Fetches documentation for the specified library ID. Default output format: `-t txt`.
 
 ## Workflow
 
-1. **Search** — Run `c7 search` with the library name to get library IDs
-2. **Context** — Run `c7 context` with the chosen library ID and query to fetch documentation
+1. **Search** — Run `c7.ts search` with the library name to get library IDs
+2. **Context** — Run `c7.ts context` with the chosen library ID and query to fetch documentation
 
 ## Best Practices
 
-- **Be specific with queries** — Use detailed, natural language queries for better results (e.g., `c7 context /vercel/next.js How to implement authentication with middleware` instead of just `auth`)
-- **Use specific versions** — Pin to an exact version for consistent results (e.g., `c7 context /vercel/next.js/v15.1.8 app router`)
+- **Be specific with queries** — Use detailed, natural language queries for better results (e.g., `c7.ts context /vercel/next.js How to implement authentication with middleware` instead of just `auth`)
+- **Use specific versions** — Pin to an exact version for consistent results (e.g., `c7.ts context /vercel/next.js/v15.1.8 app router`)
 - **Handle 202 responses** — A 202 status means the library is not yet finalized; wait and retry later
 - **Handle 301 redirects** — A 301 means the library ID has moved; use the new library ID from the response
