@@ -5,8 +5,6 @@ description: >-
   Cloudflare Browser Rendering. Use when searching documentation, looking up
   API references, fetching library docs via c7, or converting URLs/HTML to
   Markdown format.
-context: fork
-allowed-tools: Bash(c7 *), Bash(bash */render.bash *), WebSearch
 ---
 
 # Documentation Research

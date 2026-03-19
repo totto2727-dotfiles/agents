@@ -20,9 +20,28 @@ When creating scripts, follow this priority order:
 ## Decision Flow
 
 1. **Can it be done with a shell one-liner?** -> Use shell script
-2. **Does it need variables or complex logic?** -> Use TypeScript with Deno (execute with `sfw deno run <file>`)
+2. **Does it need variables or complex logic?** -> Use TypeScript with Deno (execute with `deno run <file>`)
 3. **Never use Node.js or Python**
-4. **Never use `deno run` directly** -> Always use `sfw deno run`
+
+## Shebang (REQUIRED)
+
+All script files MUST include a shebang line. This ensures scripts are executable with the correct interpreter.
+
+### Bash
+
+```bash
+#!/bin/bash
+```
+
+### Deno
+
+Include required permissions directly in the shebang:
+
+```typescript
+#!/usr/bin/env -S deno run --allow-read --allow-write
+```
+
+After adding the shebang, make the script executable with `chmod +x <file>`.
 
 ## Priority 1: Shell Script One-Liners (PREFERRED)
 
@@ -53,9 +72,7 @@ Use TypeScript with Deno only when:
 - Complex branching/conditionals are required
 - Error handling beyond simple shell constructs is needed
 
-**Execution**: Always use `sfw deno run <file>` to execute Deno scripts.
-
-Note: `sfw` is a local wrapper script that invokes Deno with sandboxed permissions. Verify its installation with `which sfw`.
+**Execution**: Always use `deno run <file>` to execute Deno scripts.
 
 ```typescript
 // Example: Complex script with variables and branching
@@ -77,7 +94,7 @@ console.log(results.join("\n"));
 Execute with:
 
 ```bash
-sfw deno run --allow-read script.ts
+deno run --allow-read script.ts
 ```
 
 ### Deno Import Rules
@@ -86,6 +103,7 @@ Three principles for Deno scripts:
 
 1. **Avoid URL imports** — never import from `https://deno.land/...`
 2. **Use `npm:` / `jsr:` prefixes** — for all external packages
+   - Prefer `jsr:` over `npm:` when the package is available on both registries
 3. **Minimize dependencies** — prefer Deno built-in APIs
 
 #### Correct Import Format
@@ -101,6 +119,10 @@ import { HttpException } from "jsr:@hono/hono@4.0.0/http-exception";
 // Deno standard library (via jsr)
 import { join } from "jsr:@std/path@1.0.0";
 import { parse } from "jsr:@std/yaml@1.0.0";
+
+// npm packages
+import { Hono } from "npm:hono@4.0.0";
+import { HttpException } from "npm:hono@4.0.0/http-exception";
 ```
 
 #### Incorrect Import Format
@@ -109,9 +131,6 @@ import { parse } from "jsr:@std/yaml@1.0.0";
 // NG: URL imports
 import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
-
-// NG: Unnecessary external package when Deno built-in API exists
-import * as fs from "npm:fs-extra";
 ```
 
 ### Prefer Deno Built-in APIs
@@ -140,59 +159,12 @@ const command = new Deno.Command("git", {
 const { stdout } = await command.output();
 ```
 
-### Minimal Dependencies
-
-Import only what you need:
-
-```typescript
-// OK: Import only required functions
-import { parse } from "jsr:@std/yaml@1.0.0";
-
-// NG: Import entire package
-import * as yaml from "jsr:@std/yaml@1.0.0";
-```
-
 ## Prohibited Technologies
 
 The following are **strictly prohibited**:
 
 - **Node.js**: `node script.js`, `npm run`, etc.
 - **Python**: `python script.py`, `python3 script.py`, `pip install`, etc.
-- **Direct Deno execution**: `deno run` (use `sfw deno run` instead)
-
-## Examples
-
-### Good: Shell One-Liner
-
-```bash
-# Find and count TypeScript files
-find . -name "*.ts" -type f | wc -l
-```
-
-### Good: TypeScript with Deno
-
-```typescript
-import { parse } from "jsr:@std/yaml@1.0.0";
-
-const config = parse(await Deno.readTextFile("./config.yaml"));
-console.log(config);
-```
-
-### Bad: Node.js
-
-```javascript
-// DO NOT USE
-const fs = require("fs");
-const files = fs.readdirSync(".");
-```
-
-### Bad: Python
-
-```python
-# DO NOT USE
-import os
-files = os.listdir('.')
-```
 
 ## Additional Resources
 

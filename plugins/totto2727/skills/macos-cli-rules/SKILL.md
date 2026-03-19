@@ -1,9 +1,9 @@
 ---
 name: macos-cli-rules
 description: >-
-  Enforces GNU coreutils with 'g' prefix on macOS instead of BSD defaults.
-  Includes grealpath for path calculations. MUST ALWAYS be applied when using
-  coreutils commands (ls, find, sed, awk, grep, realpath, etc.) on macOS.
+  Enforces GNU coreutils with 'g' prefix on macOS instead of BSD defaults. MUST
+  ALWAYS be applied when using coreutils commands (ls, find, sed, awk, grep,
+  etc.) on macOS. On Linux, use standard commands directly.
 ---
 
 # macOS CLI Rules
@@ -16,38 +16,39 @@ description: >-
 
 ## Command Mapping
 
-| GNU Command (Use) | Mac BSD Command (Prohibited) | Description                     |
-| ----------------- | ---------------------------- | ------------------------------- |
-| `gls`             | `ls`                         | List directory contents         |
-| `gfind`           | `find`                       | Find files                      |
-| `gsed`            | `sed`                        | Stream editor                   |
-| `gawk`            | `awk`                        | Pattern scanning and processing |
-| `ggrep`           | `grep`                       | Search patterns                 |
-| `gcat`            | `cat`                        | Concatenate files               |
-| `gcp`             | `cp`                         | Copy files                      |
-| `gmv`             | `mv`                         | Move files                      |
-| `grm`             | `rm`                         | Remove files                    |
-| `gmkdir`          | `mkdir`                      | Create directories              |
-| `gchmod`          | `chmod`                      | Change file permissions         |
-| `gchown`          | `chown`                      | Change file ownership           |
-| `gdate`           | `date`                       | Display/set date                |
-| `gtouch`          | `touch`                      | Change file timestamps          |
-| `ghead`           | `head`                       | Display first lines             |
-| `gtail`           | `tail`                       | Display last lines              |
-| `gsort`           | `sort`                       | Sort lines                      |
-| `guniq`           | `uniq`                       | Remove duplicate lines          |
-| `gwc`             | `wc`                         | Word count                      |
-| `gcut`            | `cut`                        | Cut fields                      |
-| `gtr`             | `tr`                         | Translate characters            |
-| `gxargs`          | `xargs`                      | Build and execute commands      |
-| `gstat`           | `stat`                       | Display file status             |
-| `greadlink`       | `readlink`                   | Read symbolic links             |
-| `gln`             | `ln`                         | Create links                    |
-| `gshuf`           | `shuf`                       | Shuffle lines                   |
-| `gsplit`          | `split`                      | Split files                     |
-| `gbase64`         | `base64`                     | Base64 encode/decode            |
-| `gmd5sum`         | `md5`                        | MD5 checksum                    |
-| `gsha256sum`      | `shasum`                     | SHA256 checksum                 |
+| GNU Command (Use) | Mac BSD Command (Prohibited) | Description                                          |
+| ----------------- | ---------------------------- | ---------------------------------------------------- |
+| `gls`             | `ls`                         | List directory contents                              |
+| `gfind`           | `find`                       | Find files                                           |
+| `gsed`            | `sed`                        | Stream editor                                        |
+| `gawk`            | `awk`                        | Pattern scanning and processing                      |
+| `ggrep`           | `grep`                       | Search patterns                                      |
+| `gcat`            | `cat`                        | Concatenate files                                    |
+| `gcp`             | `cp`                         | Copy files                                           |
+| `gmv`             | `mv`                         | Move files                                           |
+| `grm`             | `rm`                         | Remove files                                         |
+| `gmkdir`          | `mkdir`                      | Create directories                                   |
+| `gchmod`          | `chmod`                      | Change file permissions                              |
+| `gchown`          | `chown`                      | Change file ownership                                |
+| `gdate`           | `date`                       | Display/set date                                     |
+| `gtouch`          | `touch`                      | Change file timestamps                               |
+| `ghead`           | `head`                       | Display first lines                                  |
+| `gtail`           | `tail`                       | Display last lines                                   |
+| `gsort`           | `sort`                       | Sort lines                                           |
+| `guniq`           | `uniq`                       | Remove duplicate lines                               |
+| `gwc`             | `wc`                         | Word count                                           |
+| `gcut`            | `cut`                        | Cut fields                                           |
+| `gtr`             | `tr`                         | Translate characters                                 |
+| `gxargs`          | `xargs`                      | Build and execute commands                           |
+| `gstat`           | `stat`                       | Display file status                                  |
+| `greadlink`       | `readlink`                   | Read symbolic links                                  |
+| `gln`             | `ln`                         | Create links                                         |
+| `gshuf`           | `shuf`                       | Shuffle lines                                        |
+| `gsplit`          | `split`                      | Split files                                          |
+| `gbase64`         | `base64`                     | Base64 encode/decode                                 |
+| `gmd5sum`         | `md5`                        | MD5 checksum                                         |
+| `gsha256sum`      | `shasum`                     | SHA256 checksum                                      |
+| `grealpath`       | `realpath`                   | Resolve paths (see [realpath](../realpath/SKILL.md)) |
 
 ## Examples
 
@@ -121,58 +122,14 @@ gfind . -type f -name "*.ts" -exec ggrep -l "pattern" {} \;
 gfind . -name "*.log" -mtime +30 -delete
 ```
 
-## grealpath: Path Operations
+## Path Operations
 
-**ALWAYS** use `grealpath` for:
+For path calculations (relative paths, absolute path conversion, symlink resolution), see the dedicated [realpath](../realpath/SKILL.md) skill.
 
-- Calculating relative paths between files/directories
-- Converting relative paths to absolute paths
-- Resolving symbolic links to absolute paths
+## Platform Note
 
-**NEVER** manually calculate relative paths, use `cd`/`pwd` combinations, or use string manipulation for paths.
-
-### Relative Path Calculation
-
-Use `grealpath --relative-to=<base>` to calculate relative paths:
-
-```bash
-# Calculate relative path from base directory to target
-grealpath --relative-to=/home/user /home/user/test
-# Output: test
-
-# Calculate relative path from current directory
-grealpath --relative-to=. ./subdir/file.txt
-# Output: subdir/file.txt
-
-# Calculate relative path between two specific paths
-grealpath --relative-to=/path/to/base /path/to/base/subdir/file.txt
-# Output: subdir/file.txt
-```
-
-### Absolute Path Conversion
-
-```bash
-# Convert relative path to absolute path
-grealpath ./subdir/file.txt
-# Output: /home/user/project/subdir/file.txt
-
-# Resolve symbolic links to absolute paths
-grealpath symlink
-# Output: /home/user/project/actual/path
-```
-
-### Common Use Cases
-
-```bash
-# From file A to file B
-grealpath --relative-to=/path/to/fileA /path/to/fileB
-
-# Simple conversion
-grealpath relative/path/to/file
-
-# Resolve all symbolic links
-grealpath symlink
-```
+- **macOS**: Use this skill — all coreutils commands require the `g` prefix.
+- **Linux**: Use standard coreutils commands directly (no prefix needed). This skill does not apply.
 
 ## Installation Note
 
@@ -190,5 +147,3 @@ After installation, commands are available with `g` prefix.
 - Better compatibility with Linux systems
 - More features and options than BSD versions
 - Consistent behavior in scripts across different environments
-- `grealpath` requires GNU coreutils (the `--relative-to` option is not available in BSD `realpath`)
-- Paths are normalized (removes `.` and `..` components)

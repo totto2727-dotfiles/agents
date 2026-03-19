@@ -1,6 +1,6 @@
 ---
 name: zmx
-description: Session persistence for terminal processes using zmx. Use when creating, attaching, detaching, listing, or killing terminal sessions, or when retrieving session scrollback history.
+description: Session persistence for terminal processes using zmx. Use when creating, attaching, detaching, listing, or killing terminal sessions, when retrieving session scrollback history, or when running background processes and long-running services such as development servers.
 ---
 
 # zmx - Session Persistence for Terminal Processes

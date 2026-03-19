@@ -6,7 +6,6 @@ description: >-
   Conventional Commits with GPG signing, staging/unstaging/stash rules, safe
   file deletion via git stash, multi-branch PR splitting, and command execution
   discipline. If the task involves git in any way, load this skill first.
-context: fork
 ---
 
 # Git Workflow
