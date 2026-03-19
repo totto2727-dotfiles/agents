@@ -1,19 +1,19 @@
-# Cloudflare Markdown Rendering
+# Web to Markdown Conversion
 
-Renders web pages or raw HTML content to Markdown using Cloudflare Browser Rendering API.
+Renders web pages or raw HTML content to Markdown using Cloudflare Browser Rendering API via `web2md.ts` CLI (`~/.local/bin/web2md.ts`).
 
 ## Usage
 
 Convert a URL to Markdown:
 
 ```bash
-bash render.bash --url "https://example.com"
+web2md.ts --url "https://example.com"
 ```
 
 Convert raw HTML to Markdown:
 
 ```bash
-bash render.bash --html "<div>Hello World</div>"
+web2md.ts --html "<div>Hello World</div>"
 ```
 
 ## Options
@@ -32,7 +32,7 @@ bash render.bash --html "<div>Hello World</div>"
 ### Basic URL conversion
 
 ```bash
-bash render.bash --url "https://developers.cloudflare.com/"
+web2md.ts --url "https://developers.cloudflare.com/"
 ```
 
 ### JavaScript-heavy pages
@@ -40,19 +40,19 @@ bash render.bash --url "https://developers.cloudflare.com/"
 For SPAs or JS-heavy pages, use `networkidle0` or `networkidle2`:
 
 ```bash
-bash render.bash --url "https://spa-example.com" --wait-until networkidle0
+web2md.ts --url "https://spa-example.com" --wait-until networkidle0
 ```
 
 ### Exclude CSS requests
 
 ```bash
-bash render.bash --url "https://example.com" --reject '/^.*\.(css)/'
+web2md.ts --url "https://example.com" --reject '/^.*\.(css)/'
 ```
 
 ### Custom user agent
 
 ```bash
-bash render.bash --url "https://example.com" --user-agent "Mozilla/5.0 (compatible; MyBot/1.0)"
+web2md.ts --url "https://example.com" --user-agent "Mozilla/5.0 (compatible; MyBot/1.0)"
 ```
 
 ## Credentials
@@ -68,20 +68,3 @@ To store credentials:
 security add-generic-password -s CLOUDFLARE_ACCOUNT_ID -a CLOUDFLARE_ACCOUNT_ID -w "your-account-id"
 security add-generic-password -s CLOUDFLARE_MARKDOWN_API_KEY -a CLOUDFLARE_MARKDOWN_API_KEY -w "your-api-token"
 ```
-
-## Output
-
-Returns JSON response from Cloudflare API:
-
-```json
-{
-  "success": true,
-  "result": "# Example Domain\n\nThis domain is for use in illustrative examples..."
-}
-```
-
-## Requirements
-
-- `jq` for JSON processing
-- `curl` for HTTP requests
-- macOS Keychain with stored credentials

@@ -14,11 +14,11 @@ Perform prioritized documentation research and return only relevant results.
 
 ## Available Tools
 
-| Priority | Tool          | Use Case                                             | Reference                                                              |
-| -------- | ------------- | ---------------------------------------------------- | ---------------------------------------------------------------------- |
-| Primary  | `c7.ts` CLI   | General library/framework official docs              | [references/c7-cli.md](references/c7-cli.md)                           |
-| Fallback | `WebSearch`   | When above sources are insufficient                  | —                                                                      |
-| Fallback | `render.bash` | Extract clean markdown from URLs found via WebSearch | [references/cloudflare-markdown.md](references/cloudflare-markdown.md) |
+| Priority | Tool        | Use Case                                             | Reference                                    |
+| -------- | ----------- | ---------------------------------------------------- | -------------------------------------------- |
+| Primary  | `c7.ts` CLI | General library/framework official docs              | [references/c7-cli.md](references/c7-cli.md) |
+| Fallback | `WebSearch` | When above sources are insufficient                  | —                                            |
+| Fallback | `web2md.ts` | Extract clean markdown from URLs found via WebSearch | [references/web2md.md](references/web2md.md) |
 
 ## Workflow
 
@@ -34,7 +34,7 @@ Perform prioritized documentation research and return only relevant results.
    - Prefer results from official documentation sites
 
 4. **Deep content extraction (if needed)**
-   - Use `render.bash` to extract clean markdown from promising URLs (see [references/cloudflare-markdown.md](references/cloudflare-markdown.md))
+   - Use `web2md.ts` to extract clean markdown from promising URLs (see [references/web2md.md](references/web2md.md))
    - Only fetch URLs that are likely to contain the needed information
 
 ## Content Trust
