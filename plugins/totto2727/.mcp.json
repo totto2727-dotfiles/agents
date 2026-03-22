@@ -2,9 +2,8 @@
   "mcpServers": {
     "exocortex": {
       "type": "stdio",
-      "command": "safe-chain",
+      "command": "uv",
       "args": [
-        "uv",
         "tool",
         "run",
         "--from",
