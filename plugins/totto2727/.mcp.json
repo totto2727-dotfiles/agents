@@ -30,11 +30,12 @@
         "Authorization": "Bearer ${Z_AI_API_KEY}"
       }
     },
-    "web-search-prime": {
-      "type": "http",
-      "url": "https://api.z.ai/api/mcp/web_search_prime/mcp",
-      "headers": {
-        "Authorization": "Bearer ${Z_AI_API_KEY}"
+    "brave-search": {
+      "type": "stdio",
+      "command": "bunx",
+      "args": ["-y", "@brave/brave-search-mcp-server"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
       }
     },
     "web-reader": {

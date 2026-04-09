@@ -13,27 +13,27 @@ description: >-
 
 # Web Search
 
-Search the web and retrieve page content using Z AI MCP tools.
+Search the web and retrieve page content using Brave Search MCP and Z AI MCP tools.
 
 ## Available Tools
 
-| Role     | Tool                 | Use Case                                             | Reference                                                    |
-| -------- | -------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| Search   | `web_search_prime`   | Web search with real-time results                    | [references/zai-web-search.md](references/zai-web-search.md) |
-| Fetch    | `webReader`          | Retrieve full page content from a URL                | [references/zai-web-reader.md](references/zai-web-reader.md) |
-| Delegate | `oss-analysis` skill | GitHub repository analysis (code, structure, issues) | [../oss-analysis/SKILL.md](../oss-analysis/SKILL.md)         |
+| Role     | Tool                 | Use Case                                             | Reference                                                        |
+| -------- | -------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- |
+| Search   | `brave_web_search`   | Web search with real-time results                    | [references/brave-web-search.md](references/brave-web-search.md) |
+| Fetch    | `webReader`          | Retrieve full page content from a URL                | [references/zai-web-reader.md](references/zai-web-reader.md)     |
+| Delegate | `oss-analysis` skill | GitHub repository analysis (code, structure, issues) | [../oss-analysis/SKILL.md](../oss-analysis/SKILL.md)             |
 
-If Z AI MCP tools are unavailable, fall back to the equivalent standard tools provided by the agent runtime.
+If MCP tools are unavailable, fall back to the equivalent standard tools provided by the agent runtime.
 
 ## Workflow
 
 1. **Check if the target is a GitHub repository**
    - If the search target is a GitHub repository, delegate to the [oss-analysis](../oss-analysis/SKILL.md) skill instead of proceeding with web search
 
-2. **Search with `web_search_prime`**
+2. **Search with `brave_web_search`**
    - Construct a specific query targeting official sources when possible
    - Review returned titles, URLs, and summaries
-   - If the MCP tool is unavailable, use the standard web search tool
+   - If the Brave Search MCP tool is unavailable, use the standard web search tool
 
 3. **Evaluate results**
    - Sufficient information found -> Return results
